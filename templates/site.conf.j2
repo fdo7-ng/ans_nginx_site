@@ -1,0 +1,14 @@
+server {
+    listen 443 ssl;
+    server_name {{ domain_name }};
+
+    ssl_certificate {{ letsencrypt_certs_dir }}/{{ domain_name }}.crt; 
+    ssl_certificate_key {{ letsencrypt_keys_dir }}/{{ domain_name }}.key;
+
+    access_log /var/log/nginx/nginx.vhost.access.log;
+    error_log /var/log/nginx/nginx.vhost.error.log;
+    location / {
+        root /usr/share/nginx/html/{{ domain_name }}/;
+        index index.html;
+    }
+}
